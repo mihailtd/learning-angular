@@ -11,23 +11,28 @@ import { BookModel, tags } from '../book-model'
 export class LibraryComponent implements OnInit {
   activeTab: String = 'all'
   books: BookModel[]
+  search: String = ''
 
   constructor(public libraryService: LibraryService) { }
 
   changeActiveTab(activeTab) {
+    this.search = ''
     this.activeTab = activeTab
     this.books = this.getBooksForTag(activeTab)
   }
 
-  searchBookByTitle(title: any) {
-    if (title && title.target && title.target.value) {
-      this.books = this.books.filter(book => {
-        return book.title.toUpperCase().indexOf(title.target.value.toUpperCase()) >= 0
-      })
-    } else if (title.target.value === '') {
-      this.books = this.getBooksForTag(this.activeTab)
-      return
+  searchBook(event: any) {
+    this.search = event.target.value
+    this.books = this.getBookByTitle(event.target.value)
+  }
+
+  getBookByTitle(title: String) {
+    if (!title) {
+      return this.getBooksForTag(this.activeTab)
     }
+    return this.books.filter(book => {
+      return book.title.toUpperCase().indexOf(title.toUpperCase()) >= 0
+    })
   }
 
   getBooksForTag(tag: String) {

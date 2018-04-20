@@ -11,3 +11,13 @@
 main {
   height: 94vh;
 }
+
+@media screen and (max-width: 1087px) {
+  .nav {
+    height: 22vh;
+  }
+  
+  main {
+    height: 78vh;
+  }
+}
