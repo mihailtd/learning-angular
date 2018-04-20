@@ -17,6 +17,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { LibraryComponent } from './library/library.component'
+import { LibraryService } from './library.service';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { BookComponent } from './book/book.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -39,7 +42,9 @@ const appRoutes: Routes = [
     NotFoundComponent,
     HomeComponent,
     UserDetailsComponent,
-    LibraryComponent
+    LibraryComponent,
+    BookDetailsComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,7 @@ const appRoutes: Routes = [
       }
     )
   ],
-  providers: [UserService],
+  providers: [UserService, LibraryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

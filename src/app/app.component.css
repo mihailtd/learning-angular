@@ -3,3 +3,11 @@
   margin: 0 0 0 0;
   overflow: hidden;
 }
+
+.nav {
+  height: 6vh;
+}
+
+main {
+  height: 94vh;
+}

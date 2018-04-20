@@ -5,25 +5,11 @@ import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class UserService {
-  usersUrl = 'https://randomuser.me/api/?results=15' //JSON.parse('../assets/config.json').usersUrl
+  usersUrl = 'https://randomuser.me/api/?results=15'
   users: Object[] = []
   contacts: Object[] = this.getContactList() || []
 
-  // Observable string sources (Subject)
-  // public addContactSubject: Subject<Object> = new Subject<Object>()
-  // public removeContactSubject: Subject<Object> = new Subject<Object>()
-
-  // addContact$ = this.addContactSubject.asObservable()
-  // removeContact$ = this.removeContactSubject.asObservable()
-
-  constructor(private http: HttpClient) {
-    // this.addContactSubject.subscribe(user => {
-    //   this.addUserToContacts(user)
-    // })
-    // this.removeContactSubject.subscribe(user => {
-    //   this.removeUserFromContacts(user)
-    // })
-  }
+  constructor(private http: HttpClient) { }
 
   getUsers() {
     return new Promise((resolve, reject) => {
