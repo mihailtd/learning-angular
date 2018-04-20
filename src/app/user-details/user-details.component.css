@@ -1,0 +1,10 @@
+/* .my-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+input {
+  font-size: 18px;
+  width: 400px;
+  height: 35px;
+}

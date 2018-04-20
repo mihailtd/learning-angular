@@ -1,0 +1,19 @@
+.my-container {
+  height: 100%;
+  margin: 0 0 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.agenda, .sidebar {
+  flex-wrap: nowrap;
+  flex: 1;
+}

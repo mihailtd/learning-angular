@@ -1,0 +1,38 @@
+<div class="my-container">
+  <h3 *ngIf="userService[users].length === 0 && type === 'contacts'">No contacts</h3>
+  <div class="user" *ngFor="let user of userService[users]">
+    <div class="card">
+      <div class="card-content">
+        <div class="left">
+          <img src="{{user?.picture?.thumbnail}}" alt="">
+          <a *ngIf="type === 'users'" class="button is-primary" (click)="userService.addUserToContacts(user)">Add</a>
+          <a *ngIf="type === 'contacts'" class="button is-primary" (click)="userService.removeUserFromContacts(user)">Remove</a>
+          <a *ngIf="type === 'contacts'" class="button" (click)="editUser(user)">Edit</a>
+        </div>
+        <div class="right">
+          <i class="fa fa-address-book fa-2x" aria-hidden="true"></i>
+          <div class="details">
+            <span>{{user?.name?.first + ' ' + user?.name?.last}}</span>
+            <span>{{user?.email}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="editModalOpened" class="modal" [ngClass]="{'is-active': editModalOpened}">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        Edit User
+      </header>
+      <section class="modal-card-body">
+        <app-user-details [user]="currentUser"></app-user-details>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" (click)="editModalOpened = false">Save changes</button>
+        <button class="button" (click)="editModalOpened = false">Cancel</button>
+      </footer>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="editModalOpened = false"></button>
+  </div>
+</div>
