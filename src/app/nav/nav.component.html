@@ -1,7 +1,14 @@
-<nav class="navbar is-transparent" role="navigation">
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <!-- <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true">Test 1</span>
+      <span aria-hidden="true">Test 1</span>
+      <span aria-hidden="true">Test 1</span>
+    </a>
+  </div> -->
+  <div class="navbar-menu is-active">
     <div class="navbar-start">
-      <a routerLink="/" routerLinkActive="active" class="navbar-item" href="#">
+      <a routerLink="/home" routerLinkActive="active" class="navbar-item" href="#">
         Home
       </a>
       <a routerLink="/users" routerLinkActive="active" class="navbar-item" href="#">
@@ -9,6 +16,9 @@
       </a>
       <a routerLink="/chat" routerLinkActive="active" class="navbar-item" href="#">
         Chat
+      </a>
+      <a routerLink="/library" routerLinkActive="active" class="navbar-item" href="#">
+        Library
       </a>
     </div>
   </div>

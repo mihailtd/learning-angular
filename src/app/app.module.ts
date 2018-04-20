@@ -15,12 +15,15 @@ import { ChatComponent } from './chat/chat.component'
 import { UsersComponent } from './users/users.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
-import { UserDetailsComponent } from './user-details/user-details.component'
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { LibraryComponent } from './library/library.component'
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: 'users', component: UsersComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'library', component: LibraryComponent },
   { path: '**', component: NotFoundComponent }
 ]
 
@@ -35,7 +38,8 @@ const appRoutes: Routes = [
     UsersComponent,
     NotFoundComponent,
     HomeComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    LibraryComponent
   ],
   imports: [
     BrowserModule,
