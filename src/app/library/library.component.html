@@ -1,15 +1,15 @@
 <nav class="panel">
   <div class="panel-heading">
       <h1>Books</h1>
+      <div class="panel-block">
+        <p class="control has-icons-left">
+          <input id="search-box" class="input is-small" [formControl]="search" type="text" placeholder="search book">
+          <span class="icon is-small is-left">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </span>
+        </p>
+      </div>
       <button color="primary" type="button" (click)="openBookFormModal(null)" mat-raised-button>Add Book</button>
-  </div>
-  <div class="panel-block">
-    <p class="control has-icons-left">
-      <input id="search-box" class="input is-small" [formControl]="search" type="text" placeholder="search book">
-      <span class="icon is-small is-left">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </span>
-    </p>
   </div>
   <p class="panel-tabs">
     <a (click)="changeActiveTab('all')" [ngClass]="{'is-active': activeTab === 'all'}">all</a>

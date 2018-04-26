@@ -14,7 +14,7 @@ nav {
 }
 
 .panel-block {
-  flex: 1;
+  width: 50%;
 }
 
 .panel-tabs {
