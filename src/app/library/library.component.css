@@ -28,7 +28,7 @@ nav {
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
