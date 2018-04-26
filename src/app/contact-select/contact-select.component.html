@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Givethis book to others</h1>
+<mat-form-field>
+  <mat-select placeholder="User" [formControl]="userSelect" [compareWith]="compareFn" multiple>
+    <mat-select-trigger>
+      {{ (userSelect?.value?.length > 0) ? userSelect.value[0].email : []}}
+      <span *ngIf="userSelect.value?.length > 1" class="example-additional-selection">
+        (+ {{userSelect.value.length - 1}} others)
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let user of data.contacts"
+      [value]="user">{{user.email}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-dialog-actions>
+  <div class="form-footer">
+    <button color="primary" type="button" (click)="close(userSelect.value)" mat-raised-button>Save</button>
+    <button type="button" mat-dialog-close mat-raised-button>Cancel</button>
+  </div>
+</mat-dialog-actions>

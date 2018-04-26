@@ -2,23 +2,21 @@ import { Subject } from 'rxjs/Subject'
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
+import { UserModel, genders } from './user-model';
+import { ObserveOnOperator } from 'rxjs/operators/observeOn';
 
 @Injectable()
 export class UserService {
-  usersUrl = 'https://randomuser.me/api/?results=15'
-  users: Object[] = []
-  contacts: Object[] = this.getContactList() || []
+  private usersUrl = 'https://randomuser.me/api/?results=15'
+  public users: Object[] = []
+  public genders: String[] = genders
+  public contacts: Object[] = this.getContactList() || []
+  public currentUser: UserModel = this.getCurrentUser()
 
   constructor(private http: HttpClient) { }
 
-  getUsers() {
-    return new Promise((resolve, reject) => {
-      this.http.get(this.usersUrl)
-        .toPromise()
-        .then(res => {
-          return resolve(res)
-        }, err => reject(err))
-    })
+  getUsers(): Promise<Object> {
+    return this.http.get(this.usersUrl).toPromise()
   }
 
   checkUserExists(user, list) {
@@ -27,6 +25,19 @@ export class UserService {
     })
     if (foundContactIndex >= 0) return true
     return false
+  }
+
+  getCurrentUser(): UserModel {
+    return JSON.parse(sessionStorage.getItem('user'))
+  }
+
+  saveCurrentUser(user: UserModel) {
+    this.currentUser = user
+    sessionStorage.setItem('user', JSON.stringify(user))
+  }
+
+  isCurrentUser(): boolean {
+    return JSON.parse(sessionStorage.getItem('user')) !== null
   }
 
   addUserToContacts(user) {
@@ -52,8 +63,19 @@ export class UserService {
     this.refreshContacts()
   }
 
-  editUser(user) {
-    console.log(user)
+  editUser(newUser: UserModel) {
+    const newContacts = this.contacts.map((contact: UserModel) => {
+      if (contact.login.username === newUser.login.username) {
+        return {...contact, ...newUser}
+      } else return contact
+    })
+
+    this.resetContacts(newContacts)
+  }
+
+  resetContacts(newContacts) {
+    this.contacts = newContacts
+    sessionStorage.setItem('contacts', JSON.stringify(newContacts))
   }
 
   getContactList() {

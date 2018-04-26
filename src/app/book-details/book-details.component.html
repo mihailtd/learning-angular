@@ -1,69 +1,28 @@
-<div class="my-container">
-  <form action="" [formGroup]="userForm">
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="email" formControlName="email" placeholder="Email address">
-        <span class="icon is-small is-left">
-          <i class="fa fa-envelope"></i>
+<form [formGroup]="bookForm">
+  <mat-form-field floatLabel="Title">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Title" required>
+  </mat-form-field>
+
+  <mat-form-field floatLabel="Author">
+    <mat-label>Author</mat-label>
+    <input matInput formControlName="author" placeholder="Author" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Tags" formControlName="tags" multiple>
+      <mat-select-trigger>
+        {{bookForm.controls['tags'].value ? bookForm.controls['tags'].value[0] : []}}
+        <span *ngIf="bookForm.controls['tags'].value?.length > 1" class="example-additional-selection">
+          (+ {{bookForm.controls['tags'].value.length - 1}} others)
         </span>
-        <span class="icon is-small">
-          <i class="fa fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">This email is invalid</p>
-    </div>
-    <div class="field">
-      <label class="label">Gender</label>
-      <div class="control">
-        <div class="select">
-          <select formControlName="gender">
-            <option *ngFor="let gender of genders">{{gender}}</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <h4>Login</h4>
-    <div class="field">
-      <label class="label">User</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="text" formControlName="username" placeholder="User name">
-        <span class="icon is-small is-left">
-          <i class="fa fa-envelope"></i>
-        </span>
-        <span class="icon is-small">
-          <i class="fa fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">User name is invalid</p>
-    </div>
-    <div class="field">
-      <label class="label">Password</label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="password" formControlName="password" placeholder="Password">
-        <span class="icon is-small is-left">
-          <i class="fa fa-envelope"></i>
-        </span>
-        <span class="icon is-small">
-          <i class="fa fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">This password is invalid</p>
-    </div>
-    <hr>
-    <div class="field">
-      <label class="label">Date </label>
-      <div class="control has-icons-left has-icons-right">
-        <input class="input is-danger" type="date" formControlName="dob" placeholder="Date of birth">
-        <span class="icon is-small is-left">
-          <i class="fa fa-envelope"></i>
-        </span>
-        <span class="icon is-small">
-          <i class="fa fa-exclamation-triangle"></i>
-        </span>
-      </div>
-      <p class="help is-danger">This date of birth is invalid</p>
-    </div>
-  </form>
-</div>
+      </mat-select-trigger>
+      <mat-option *ngFor="let tag of allTags" [value]="tag">{{tag}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form-footer">
+    <button color="primary" type="button" [disabled]="!bookForm.valid" (click)="submit(bookForm.value)" mat-raised-button>Save</button>
+    <button type="button" mat-raised-button (click)="cancel()">Cancel</button>
+  </div>
+</form>

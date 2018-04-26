@@ -1,0 +1,8 @@
+<mat-card>
+  <img [src]="user?.picture?.thumbnail" alt="" mat-card-avatar>
+  <div class="title">
+    <mat-card-title>{{user?.login?.username}}</mat-card-title>
+    <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
+  </div>
+  <button *ngIf="editable" mat-button (click)="editEvent.emit(user)"><i class="fa fa-edit"></i> Edit</button>
+</mat-card>

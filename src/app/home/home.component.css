@@ -1,0 +1,26 @@
+.my-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.current-user {
+    flex: 2;
+    margin: 10px 10px 10px 10px;
+    width: 40vw;
+    height: fit-content;
+    max-width: 600px;
+    min-width: 400px;
+}
+
+.my-container > mat-card {
+    flex: 1;
+    margin: 10px 10px 10px 10px;
+    width: 40vw;
+    max-width: 600px;
+    width: fit-content;
+    min-width: 400px;
+    height: fit-content;
+}

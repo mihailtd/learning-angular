@@ -1,3 +1,30 @@
-<p>
-  book works!
-</p>
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <i class="fa fa-book fa-2x"></i>
+      <h1>
+        {{book.title}} by {{book.author}}
+      </h1>
+    </mat-panel-title>
+    <mat-card-subtitle>
+      <button type="button" mat-raised-button (click)="editBook($event, book)">
+        <i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+    </mat-card-subtitle>
+  </mat-expansion-panel-header>
+  <div class="users" dnd-sortable-container [sortableData]="users">
+    <div class="recicle-bin" dnd-droppable (onDropSuccess)="removeUserFromBook($event.dragData)">
+      <button *ngIf="showRecycelBin" class="mat-fab">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+    <div class="avatars">
+      <div *ngFor="let user of users; let i = index" dnd-sortable dnd-draggable [dragEnabled]="true" [sortableIndex]="i" [dragData]="{ user: user, book: book }"
+        (dragend)="dragUser($event.type)" (dragstart)="dragUser($event.type)">
+        <img [src]="user?.picture?.thumbnail" alt="" dnd-draggable-handle>
+      </div>
+      <button (click)="addUserToBook(book)" class="mat-fab">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+</mat-expansion-panel>

@@ -1,0 +1,14 @@
+.my-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.agenda {
+  overflow-x: auto;
+  flex: 1;
+}
+
+.chat {
+  flex: 2;
+}

@@ -7,8 +7,11 @@ import { UserService } from '../user.service'
   styleUrls: ['./agenda.component.css']
 })
 export class AgendaComponent implements OnInit {
-  constructor(private userService: UserService) { }
+  public loading: number = 0
+
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
+    this.userService.getContactList()
   }
 }

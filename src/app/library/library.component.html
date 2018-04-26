@@ -1,10 +1,11 @@
 <nav class="panel">
-  <p class="panel-heading">
-    Books
-  </p>
+  <div class="panel-heading">
+      <h1>Books</h1>
+      <button color="primary" type="button" (click)="openBookFormModal(null)" mat-raised-button>Add Book</button>
+  </div>
   <div class="panel-block">
     <p class="control has-icons-left">
-      <input class="input is-small" [value]="search" (change)="searchBook($event)" type="text" placeholder="search book">
+      <input id="search-box" class="input is-small" [formControl]="search" type="text" placeholder="search book">
       <span class="icon is-small is-left">
         <i class="fa fa-search" aria-hidden="true"></i>
       </span>
@@ -18,12 +19,30 @@
     <a (click)="changeActiveTab('Databases')" [ngClass]="{'is-active': activeTab === 'Databases'}">Databases</a>
   </p>
   <div class="books">
-    <a class="panel-block is-active" *ngFor="let book of books">
-      <span class="panel-icon">
-        <i class="fa fa-book" aria-hidden="true"></i>
-      </span>
-      <span class="book-title">{{book.title}}</span>
-      <button class="button"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
-    </a>
+    <div *ngFor="let book of books">
+      <app-book
+        (removeUserFromBookEvent)="removeUserFromBook($event)"
+        (addUserToBookEvent)="openAddUserToBookDialog(contacts, book)"
+        (editBookEvent)="openBookFormModal($event)"
+        [users]="book.users"
+        [book]="book"></app-book>
+    </div>
   </div>
 </nav>
+
+<div *ngIf="editModalOpened" class="modal" [ngClass]="{'is-active': editModalOpened}">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <h1>{{ currentBook ? 'Edit' : 'Add'}} Book</h1>
+      </header>
+      <section class="modal-card-body">
+        <app-book-details *ngIf="editModalOpened"
+          (formCancelEvent)="editModalOpened = !editModalOpened"
+          (formSubmitEvent)="submitBookForm($event)"
+          [allTags]="allTags"
+          [book]="currentBook"></app-book-details>
+      </section>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="editModalOpened = false"></button>
+  </div>

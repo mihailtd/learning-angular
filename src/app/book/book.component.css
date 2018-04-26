@@ -1,0 +1,59 @@
+mat-expansion-panel {
+    margin: 5px 5px 5px 5px;
+    padding: 15px 15px 15px 15px;
+    max-width: 500px;
+    min-width: 400px;
+    width: 40vw;
+    height: fit-content;
+}
+
+mat-card-subtitle {
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 5px;
+}
+
+button {
+    margin: 2px 2px 2px 2px;
+}
+
+h1 {
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.users {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.users img {
+    border-radius: 50%;
+    margin: 3px 3px 3px 3px;
+}
+
+.recicle-bin button {
+    background-color: #931F1D;
+    animation: pulse .7s infinite;
+}
+
+
+@keyframes pulse {
+    0% {
+        background-color: #931F1D
+    }
+    100% {
+        background-color: red
+    }
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 
 import { routerTransition } from './router.animation'
+import { LibraryService } from './library.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { routerTransition } from './router.animation'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor() { }
+  constructor(private libraryService: LibraryService) { }
 
   getState(outlet) {
     return outlet.activatedRouteData.state

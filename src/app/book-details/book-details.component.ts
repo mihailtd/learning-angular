@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core'
-import { FormBuilder, FormGroup } from '@angular/forms'
-import { BookModel, tags } from '../book-model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-book-details',
@@ -9,24 +8,29 @@ import { BookModel, tags } from '../book-model';
 })
 export class BookDetailsComponent implements OnInit {
   @Input() book
-
-  tags
+  @Input() allTags
+  @Output() formSubmitEvent: EventEmitter<any> = new EventEmitter();
+  @Output() formCancelEvent: EventEmitter<any> = new EventEmitter();
 
   bookForm: FormGroup
 
-  constructor(private fb: FormBuilder) {
-    this.tags = tags
-  }
+  constructor(private fb: FormBuilder) { }
 
   createForm() {
-    if (!this.book) return
     this.bookForm = this.fb.group({
-      id: this.book.id || null,
-      title: this.book.title || null,
-      author: this.book.author || null,
-      tags: this.book.tags.length >= 0 ? this.book.tags : [],
-      users: this.book.users.length >= 0 ? this.book.users : []
+      id: [(this.book ? this.book.id : null), Validators.required],
+      title: [(this.book ? this.book.title : null), Validators.required],
+      author: [(this.book ? this.book.author : null), Validators.required],
+      tags: [(this.book ? this.book.tags.length >= 0 ? this.book.tags : [] : []), Validators.required]
     })
+  }
+
+  submit(formData) {
+    return this.formSubmitEvent.emit(formData);
+  }
+ 
+  cancel() {
+    return this.formCancelEvent.emit(null);
   }
 
   ngOnInit() {

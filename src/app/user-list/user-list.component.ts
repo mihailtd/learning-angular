@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { UserService } from '../user.service'
+import { UserModel } from '../user-model';
 
 @Component({
   selector: 'app-user-list',
@@ -7,17 +8,26 @@ import { UserService } from '../user.service'
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  @Input() users: string
+  @Input() users: UserModel[]
+  @Input() loading: number
   @Input() type: string
-  editModalOpened = false
-  currentUser
+
+  public userFormModalOpened: Boolean = false
+
+  public currentUser: UserModel = null
 
   constructor(public userService: UserService) { }
 
   editUser(user) {
     this.currentUser = user
-    this.editModalOpened = true
+    this.userFormModalOpened = true
   }
 
-  ngOnInit() { }
+  submitUserForm(newUser) {
+    if (this.currentUser) this.userService.editUser(newUser)
+    this.userFormModalOpened = !this.userFormModalOpened
+  }
+
+  ngOnInit() {
+  }
 }

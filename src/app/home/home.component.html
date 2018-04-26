@@ -1,3 +1,24 @@
-<p>
-  home works!
-</p>
+<div class="my-container">
+  <div class="current-user">
+    <mat-card id="edit-user-form" *ngIf="isEditUser">
+      <mat-card-title>Tell us about yourself</mat-card-title>
+        <app-user-details 
+        [user]="currentUser || null"
+        [genders]="genders"
+        (formCancelEvent)="isEditUser = !isEditUser" 
+        (formSubmitEvent)="saveCurrentUser($event)"></app-user-details>
+    </mat-card>
+    <app-user-card
+      [user]="currentUser"
+      *ngIf="!isEditUser"
+      (editEvent)="isEditUser = !isEditUser"></app-user-card>
+  </div>
+  <mat-card>
+    <mat-card-title>Number of Books by Tag</mat-card-title>
+    <app-book-tag-stats></app-book-tag-stats>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>Most Popular Book</mat-card-title>
+    <app-book-popular-stats></app-book-popular-stats>
+  </mat-card>
+</div>

@@ -1,4 +1,6 @@
 <div class="my-container">
-  <h2>Contacts</h2>
-  <app-user-list [users]="'contacts'" [type]="'contacts'"></app-user-list>
+  <div class="header">
+    <h2>Contacts</h2>
+  </div>
+  <app-user-list [users]="userService.contacts" [loading]="loading" [type]="'contacts'"></app-user-list>
 </div>

@@ -5,7 +5,12 @@ nav {
 }
 
 .panel-heading {
+  width: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .panel-block {
@@ -17,10 +22,20 @@ nav {
 }
 
 .books {
+  width: 100vw;
+  height: 100%;
   flex: 20;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .books > a > button {
   margin-left: 13px;
+}
+
+.recicle-bin {
+  width: fit-content;
 }

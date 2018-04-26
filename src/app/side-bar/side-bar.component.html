@@ -1,4 +1,7 @@
 <div class="my-container">
-  <h2>New Users</h2>
-  <app-user-list [users]="'users'" [type]="'users'"></app-user-list>
+  <div class="header">
+    <h2>New Users</h2>
+    <a class="button is-primary" (click)="getUsers()">Refresh</a>
+  </div>
+  <app-user-list [users]="users" [loading]="loading" [type]="'users'"></app-user-list>
 </div>

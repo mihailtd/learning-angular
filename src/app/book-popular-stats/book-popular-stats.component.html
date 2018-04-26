@@ -1,0 +1,11 @@
+<div style="display: block">
+  <h1 *ngIf="barChartData.length === 0"> There is no popular book at this time</h1>
+  <canvas baseChart *ngIf="barChartData.length >= 1"
+    [datasets]="barChartData" 
+    [labels]="barChartLabels" 
+    [options]="barChartOptions"
+    legend="false"
+    [chartType]="barChartType" 
+    (chartHover)="chartHovered($event)" 
+    (chartClick)="chartClicked($event)"></canvas>
+</div>
