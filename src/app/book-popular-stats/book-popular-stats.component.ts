@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LibraryService } from '../library.service';
+import { BookModel } from '../book-model';
 
 @Component({
   selector: 'app-book-popular-stats',
@@ -37,7 +38,7 @@ export class BookPopularStatsComponent implements OnInit {
   }
 
   ngOnInit() {
-    let booksWithUser = this.libraryService.books.filter(book => book.users.length >= 1)
+    let booksWithUser = this.libraryService.books.filter((book: BookModel) => book.users && book.users.length >= 1)
     let data = booksWithUser.map(book => {
       return { title: book.title, numberOfUsers: book.users.length }
     })
