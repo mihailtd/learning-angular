@@ -33,6 +33,7 @@ import { ContactSelectComponent } from './contact-select/contact-select.componen
 import { BookPopularStatsComponent } from './book-popular-stats/book-popular-stats.component';
 import { ChatContactListComponent } from './chat-contact-list/chat-contact-list.component';
 import { ChatConversationComponent } from './chat-conversation/chat-conversation.component';
+import { MockApiService } from './mock-api.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -96,7 +97,7 @@ const appRoutes: Routes = [
   entryComponents: [
     ContactSelectComponent
   ],
-  providers: [UserService, LibraryService],
+  providers: [UserService, LibraryService, MockApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,8 +15,8 @@
       </a>
     </div>
   </div>
-  <div class="right" *ngIf="userService.currentUser">
-    <img [src]="userService.currentUser?.picture?.thumbnail" alt="" mat-card-avatar>
-    <a href="#">{{userService.currentUser?.login?.username}}</a>
+  <div class="right" *ngIf="userService.currentUser | async; let user">
+    <img [src]="user?.picture?.thumbnail" alt="" mat-card-avatar>
+    <a href="#">{{user?.login?.username}}</a>
   </div>
 </nav>

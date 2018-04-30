@@ -4,16 +4,37 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 import { UserModel, genders } from './user-model';
 import { ObserveOnOperator } from 'rxjs/operators/observeOn';
+import { MockApiService } from './mock-api.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class UserService {
   private usersUrl = 'https://randomuser.me/api/?results=15'
+  private _currentUser: BehaviorSubject<UserModel>
+  private dataStore: {
+    currentUser: UserModel
+  }
   public users: Object[] = []
   public genders: String[] = genders
   public contacts: Object[] = this.getContactList() || []
-  public currentUser: UserModel = this.getCurrentUser()
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private api: MockApiService) {
+    this._currentUser = <BehaviorSubject<UserModel>>new BehaviorSubject({})
+    this.dataStore = {
+      currentUser: {
+        dob: null,
+        email: null,
+        gender: 'unspecified',
+        login: {
+          username: null,
+          password: null
+        },
+        picture: {
+          thumbnail: null
+        }
+      }
+    }
+  }
 
   getUsers(): Promise<Object> {
     return this.http.get(this.usersUrl).toPromise()
@@ -27,13 +48,19 @@ export class UserService {
     return false
   }
 
-  getCurrentUser(): UserModel {
-    return JSON.parse(sessionStorage.getItem('user'))
+  get currentUser(): Observable<UserModel> {
+    return this._currentUser.asObservable()
+  }
+
+  getCurrentUser() {
+    this.dataStore.currentUser = this.api.getCurrentUser()
+    return this._currentUser.next({...this.dataStore}.currentUser)
   }
 
   saveCurrentUser(user: UserModel) {
-    this.currentUser = user
-    sessionStorage.setItem('user', JSON.stringify(user))
+    this.api.saveCurrentUser(user)
+    this.dataStore.currentUser = user // or rehydrate from API (?)
+    return this._currentUser.next({...this.dataStore}.currentUser)
   }
 
   isCurrentUser(): boolean {

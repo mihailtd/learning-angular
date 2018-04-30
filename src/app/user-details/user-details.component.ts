@@ -22,8 +22,8 @@ export class UserDetailsComponent implements OnInit {
       email: [(this.user ? this.user.email : null), Validators.required],
       gender: [(this.user ? this.user.gender : genders[0])],
       login: this.fb.group({
-        username: [{value: (this.user ? this.user.login.username : null), disabled: this.user}, Validators.required],
-        password: [(this.user ? this.user.login.password : null), Validators.required],
+        username: [{value: ( (this.user && this.user.login) ? this.user.login.username : null), disabled: this.user}, Validators.required],
+        password: [( (this.user && this.user.login) ? this.user.login.password : null), Validators.required],
       }),
       picture: this.fb.group({
         thumbnail: [(this.user && this.user.picture) ? this.user.picture.thumbnail : '']

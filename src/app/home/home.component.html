@@ -3,13 +3,13 @@
     <mat-card id="edit-user-form" *ngIf="isEditUser">
       <mat-card-title>Tell us about yourself</mat-card-title>
         <app-user-details 
-        [user]="currentUser || null"
+        [user]="currentUser | async"
         [genders]="genders"
         (formCancelEvent)="isEditUser = !isEditUser" 
         (formSubmitEvent)="saveCurrentUser($event)"></app-user-details>
     </mat-card>
     <app-user-card
-      [user]="currentUser"
+      [user]="currentUser | async"
       *ngIf="!isEditUser"
       (editEvent)="isEditUser = !isEditUser"></app-user-card>
   </div>
